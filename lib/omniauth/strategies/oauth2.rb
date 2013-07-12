@@ -74,6 +74,7 @@ module OmniAuth
 
         self.access_token = build_access_token
         self.access_token = access_token.refresh! if access_token.expired?
+        session[:access_token] = self.access_token.token # HACK
 
         super
       rescue ::OAuth2::Error, CallbackError => e
